@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Adding Border for Table -->
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+        }
+
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tables in HTML</h1>
+    <!-- table - Root Element for using Tables -->
+    <table>
+        <!-- Table Row -->
+        <!-- First Row -->
+        <tr>
+            <!-- Table Heading -->
+            <th>Heading 1</th>
+            <th>Heading 2</th>
+            <th>Heading 3</th>
+        </tr>
+        <!-- Second Row -->
+        <tr>
+            <!-- td - Table Data -->
+            <td>Data 11</td>
+            <td>Data 12</td>
+            <td>Data 13</td>
+        </tr>
+        <tr>
+            <td>Data 21</td>
+            <td>Data 22</td>
+            <td>Data 23</td>
+        </tr>
+        <tr>
+            <td>Data 31</td>
+            <td>Data 32</td>
+            <td>Data 33</td>
+        </tr>
+    </table>
+    <h1>IPL Table</h1>
+    <!-- For merging common rows - rowspan is used -->
+    <!-- For merging common columns - colspan is used -->
+    <!-- Shortcut to remove duplicate data -->
+    <!-- Rowspan - next upcoming row data should be removed -->
+    <!-- Colspan - same row data should be removed -->
+    <table>
+        <tr>
+            <th>Sl. No.</th>
+            <th colspan="3">Player Name | Country | Team</th>
+            <!-- <th colspan="2">Country & Team</th> -->
+            <!-- <th>Team</th> -->
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Virat Kohli</td>
+            <td rowspan="5">India</td>
+            <td rowspan="2">RCB</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Rajat Patidar</td>
+            <!-- <td rowspan="4">India</td> -->
+            <!-- <td>RCB</td> -->
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>MS Dhoni</td>
+            <!-- Ctrl + ? - Comment a line -->
+            <!-- <td>India</td> -->
+            <td>CSK</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Rohit Sharma</td>
+            <!-- <td>India</td> -->
+            <td rowspan="2">MI</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Hardik Pandya</td>
+            <!-- <td>India</td> -->
+            <!-- <td>MI</td> -->
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Travis Head</td>
+            <td>Australia</td>
+            <td>SRH</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Phil Salt</td>
+            <td>England</td>
+            <td>RCB</td>
+        </tr>
+    </table>
+</body>
+
+</html>

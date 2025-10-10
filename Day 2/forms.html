@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Forms in HTML -->
+     <!-- default method - get, it will expose the data in the url -->
+      <!-- We can use post method to secure the data which will pass the data using HTTP protocol (Hypertext Transfer Protocol)-->
+    <form method="post">
+        <!-- input fields are inline elements -->
+        <!-- input types in html: text, number, email -->
+        <!-- br - break the line -->
+        Name: <input type="text" name="first_name" id="first_name" maxlength="20" placeholder="Enter your name" required>
+        <br><br>
+        <input type="hidden" name="secret" id="secret" value="agent123">
+        USN: <input type="text" name="usn" id="usn" disabled value="1ce24cs188">
+        <br><br>
+        Age: <input type="number" name="age" id="age" min="0" max="100" placeholder="Enter your age">
+        <br><br>
+        Email Id: <input type="email" name="email_id" id="email_id" placeholder="example@cec.com">
+        <br><br>
+        Password: <input type="password" name="password" id="password">
+        <br><br>
+        <label for="dob">DOB:</label>
+        <input type="date" name="dob" id="dob" min=2000-01-01" max="2025-10-10">
+        <br><br>
+        <label for="hbdweek">Birthday Week:</label>
+        <input type="week" name="hbdweek" id="hbdweek">
+        <br><br>
+        <label for="hbdmonth">Birthday Month:</label>
+        <input type="month" name="hbdmonth" id="hbdmonth">
+        <br><br>
+        <label for="hbdate">Birthday & Time:</label>
+        <input type="datetime-local" name="hbdate" id="hbdate">
+        <br><br>
+        <label for="phone">Phone:</label>
+        <input type="tel" name="phone" id="phone">
+        <br><br>
+        <label for="temp_address">Temperory Address:</label>
+        <textarea name="temp_address" id="temp_address" rows="5" cols="100"></textarea>
+        <br><br>
+        <label for="per_address">Permanent Address:</label>
+        <textarea name="per_address" id="per_address" rows="5" cols="20"></textarea>
+        <br><br>
+        <label for="gender">Gender:</label>
+        <!-- For Radio button, Checkbox & Select Dropdown, value is mandatory to store the details -->
+        <!-- same name, different id will toggle the radio button -->
+        <input type="radio" name="gender" id="male" value="Male">
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" value="Female">
+        <label for="female">Female</label>
+        <input type="radio" name="gender" id="others" value="Others">
+        <label for="others">Others</label>
+        <br><br>
+        <label for="hobbies">Hobbies:</label>
+        <!-- different name, different id will allow multiple selection for checkbox -->
+        <input type="checkbox" name="talking" id="talking" value="Talk">
+        <label for="talking">Talking</label>
+        <input type="checkbox" name="travelling" id="travelling" value="Travel">
+        <label for="travelling">Travelling</label>
+        <input type="checkbox" name="hiking" id="hiking" value="Hike">
+        <label for="hiking">Hiking</label>
+        <input type="checkbox" name="gaming" id="gaming" value="Play">
+        <label for="gaming">Gaming</label>
+        <br><br>
+        <label for="state">State:</label>
+        <select name="state" id="state" multiple>
+            <option value="KA" selected>Karnataka</option>
+            <option value="TN">Tamil Nadu</option>
+            <option value="KL">Kerala</option>
+            <option value="MH" >Maharashtra</option>
+            <option value="UP">Uttar Pradesh</option>
+            <option value="GJ">Gujarat</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TS">Telangana</option>
+        </select>
+        <br><br>
+        <label for="photos">Upload Picture:</label>
+        <input type="file" name="photos" id="photos" accept="image/*" multiple>
+        <br><br>
+        <label for="rating">Give Rating:</label>
+        <input type="range" name="rating" id="rating" value="0">
+        <br><br>
+        <label for="fav_color">Favorite Color:</label>
+        <input type="color" name="fav_color" id="fav_color">
+        <br><br>
+        <input type="reset" value="Reset Form">
+        <input type="submit" value="Submit Form">
+    </form>
+</body>
+
+</html>
