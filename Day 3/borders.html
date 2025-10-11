@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* borders:
+        1) border-width: size of the border
+        2) border-style: solid, dashed, double, dotted, groove, ridge
+        3) border-color: color of the border
+        */
+        .main{
+            color: green;
+            padding: 20px;
+            border-width: 20px;
+            border-style: ridge;
+            border-color: yellow;
+            /* Shorthand property */
+            /* border: width style color; */
+            border: 20px solid green;
+            /* border on different sides */
+            /* border-top: 10px solid red;
+            border-left: 5px dotted blue;
+            border-right: 30px dashed yellow;
+            border-bottom: 30px ridge purple; */
+            /* For curved border we use border-radius */
+            border-radius: 50px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 80px;
+        }
+        .align-center{
+            text-align: center;
+        }
+        .sub {
+            color: brown;
+        }
+        .size{
+            width: 200px;
+            height: 200px;
+        }
+        .box{
+            background-color: brown;
+            border: 5px solid darkblue;
+        }
+        .squircle{
+            background-color: purple;
+            border: 5px dashed goldenrod;
+            border-radius: 50px;
+        }
+        .circle{
+            background-color: violet;
+            border: 5px solid brown;
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="main align-center">City Engineering College</h1>
+    <h3 class="sub align-center">Computer Science & Engineering</h3>
+    <div class="size box"></div>
+    <div class="size squircle"></div>
+    <div class="size circle"></div>
+</body>
+</html>

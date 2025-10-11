@@ -1,0 +1,30 @@
+div.child{
+    width: 150px;
+    height: 150px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: red;
+    border: 3px solid white;
+    text-align: center;
+}
+
+/* Flexbox */
+.parent{
+    display: flex;
+    /* Horizontal axis - Justify content */
+    /* start | center | end | space-between | space-evenly | space-around */
+    justify-content:space-between;
+    /* flex-direction: row(default), row-reverse, column, column-reverse */
+    flex-direction: column-reverse;
+    /* Vertical axis - Align Items */
+    align-items: end;
+    border: 1px solid black;
+    height: 800px;
+    /* flex-wrap: wrap is going to wrap the child for its original size */
+    flex-wrap: wrap;
+    /* To add more space b/w child we use gap property */
+    gap: 20px;
+    /* To use align-content property, first we need to use wrap property, we can align the items in vertical axis */
+    align-content: space-between;
+}

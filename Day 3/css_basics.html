@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS - Cascading Style Sheets (For Designing purpose) -->
+    <!-- 3 Types of CSS -->
+    <!-- Internal CSS, External CSS, Inline CSS -->
+    <!-- Internal CSS -->
+    <style>
+        /* selector{
+            property1: value1;
+            property2: value2;
+            property3: value3;
+        } */
+        /* This is CSS Comment */
+        /* Selector - Targetting Element */
+        /* 3 types of selectors: Element/Tag Selector, Class Selector, ID Selector */
+
+        /* Element Selector, we can use tag names: h1-h6, p, pre, table, td, th, b, ol, li */
+        h1 {
+            direction: rtl;
+        }
+
+        h3 {
+            color: green;
+        }
+
+        p {
+            /* color: orange; */
+            /* r: red, g: green, b: blue */
+            /* 0 - lowest value, 255 - highest value (Range from 0 to 255) */
+            /* color: rgba(46, 207, 183, 0.814); */
+            color: #ff2400;
+            background-color: rgb(200, 255, 125);
+            /* We can apply color in 3 ways: using name, using rgb, using hex code */
+        }
+
+        /* Class Selector */
+        /* Syntax:
+        .className{
+            property: value
+        }*/
+        .para1 {
+            color: blue;
+            background-color: lightgreen;
+        }
+
+        .main-heading {
+            font-family: "Merriweather", serif;
+            color: red;
+            direction: rtl;
+        }
+
+        .para2 {
+            /* Font Properties */
+            font-family: "Ubuntu", sans-serif;
+            line-height: 2;
+            letter-spacing: 2px;
+            word-spacing: 5px;
+            /* text-align: left | right | center | justify */
+            text-align: justify;
+            /* font-weight: 100 - 900 | bold */
+            font-weight: 300;
+
+        }
+
+        /* ID Selector is having Highest Priority */
+        /* ID > Class > Element */
+        /* Top To Bottom Approach */
+        /* ID Selector: 
+        Syntax:
+        #idName{
+        property: value;
+        }*/
+        #imp_para {
+            color: brown;
+            background-color: burlywood;
+        }
+
+        .first_para {
+            color: darkblue;
+            background-color: lightblue;
+        }
+
+        #imp_para {
+            color: lightpink;
+            background-color: brown;
+        }
+
+        .class1 {
+            color: blueviolet;
+        }
+
+        .class2 {
+            background-color: aqua;
+            font-size: 50px;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <h1 class="main-heading">Main Heading</h1>
+    <h3>Sub Heading</h3>
+    <p id="imp_para" class="first_para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo mollitia
+        vitae quaerat dolorum. Est labore
+        quod atque aperiam corporis mollitia?</p>
+    <p class="para1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis odit nihil ea ab eos magnam
+        temporibus
+        repudiandae blanditiis praesentium minus optio provident assumenda itaque quas, pariatur expedita commodi
+        dolores explicabo ipsam molestias. Eos hic pariatur, facere, voluptates accusantium, quidem fuga odio dolores
+        adipisci similique sequi officiis? Exercitationem eum repellat perspiciatis.</p>
+    <p class="para2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero perferendis a quis, officiis quo
+        sit architecto,
+        dolores temporibus harum quas recusandae ipsum laudantium, ratione reprehenderit deserunt vel. Deserunt,
+        laboriosam molestiae officia dolor ut ad, voluptatibus debitis ducimus, architecto suscipit blanditiis cum sunt
+        recusandae repellendus nesciunt ipsa enim minima soluta! Inventore eligendi illo iure hic non voluptatem fugiat
+        enim sint repellat. Recusandae facilis, deleniti suscipit molestias minus, dignissimos adipisci ullam animi quod
+        numquam debitis magni nisi dicta iusto voluptatibus praesentium tenetur, labore voluptatum architecto culpa
+        fugit. Veritatis, suscipit! Rerum aliquam animi ab esse ad optio iure eum quo maxime! Quia, nesciunt?</p>
+    <h1 class="main-heading">Second Heading</h1>
+    <h2 class="class1 class2 class3">Third Heading</h2>
+</body>
+
+</html>
