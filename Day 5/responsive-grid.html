@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../Day 4/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <!-- If you want to apply some additional styles, we should not use bootstrap classes, we should make a new class and apply for that -->
+    <style>
+        .column {
+            border: 2px solid black;
+            background-color: brown;
+            color: yellow;
+            padding: 10px;
+            font-size: 20px;
+        }
+        .inner-column{
+            border: 2px solid white;
+            background-color: yellow;
+            color: red;
+            padding: 5px;
+            font-size: 15px;    
+        }
+    </style>
+</head>
+
+<body>
+    <!-- parent element of the grid will have "row" class-->
+    <!-- child element should have "col" class -->
+    <div class="row text-center container-fluid">
+        <!-- col-3 is a Bootstrap class -->
+        <!-- column is a user-defined class -->
+        <div class="column col-lg-4 col-md-6 col-sm-12 col-3">1st part</div>
+        <div class="column col-lg-4 col-md-6 col-sm-12 col-3">2nd part</div>
+        <div class="column col-lg-4 col-md-6 col-sm-12 col-3">3rd part</div>
+        <div class="column col-lg-4 col-md-6 col-sm-12 col-3">4th part</div>
+    <h1>Uneven Size Grid</h1>
+    </div>
+    <div class="row text-center container-fluid">
+        <!-- col-3 is a Bootstrap class -->
+        <!-- column is a user-defined class -->
+        <div class="column col-lg-8 col-md-4 col-sm-3 col-3">1st part</div>
+        <div class="column col-lg-4 col-md-3 col-sm-9 col-3">2nd part</div>
+        <div class="column col-lg-4 col-md-5 col-sm-12 col-3">3rd part</div>
+        <div class="column col-lg-8 col-md-6 col-sm-12 col-3">4th part</div>
+    </div>
+    <h1>Nested Grid</h1>
+    <div class="row">
+        <div class="column col-4">
+            <div class="row">
+                <div class="inner-column col-6">Inner-column-1</div>
+                <div class="inner-column col-6">Inner-column-2</div>
+            </div>
+        </div>
+        <div class="column col-4">
+            <div class="row">
+                <div class="inner-column col-3">Inner-column-1</div>
+                <div class="inner-column col-9">Inner-column-2</div>
+            </div>
+        </div>
+        <div class="column col-4">
+            <div class="row">
+                <div class="inner-column col-4">Inner-column-1</div>
+                <div class="inner-column col-4">Inner-column-2</div>
+                <div class="inner-column col-4">Inner-column-3</div>
+            </div>
+        </div>
+    </div>
+    <script src="../Day 4/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
