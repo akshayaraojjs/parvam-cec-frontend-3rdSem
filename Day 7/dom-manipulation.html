@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="noHeading"></h1>
+    <h1>This is a first heading.</h1>
+    <h1 class="headingClass">This is a second heading with a Class.</h1>
+    <h1 id="headingId">This is a third heading with a ID.</h1>
+    <h2 class="headingClass">This is a fourth heading with h2 tag and a Class.</h2>
+    <h1>This is fifth heading.</h1>
+    <p id="paraId">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, unde!</p>
+    <p class="headingClass">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis incidunt quis vitae omnis
+        dolores reiciendis natus tempora architecto voluptatem. Obcaecati rem blanditiis aliquam animi soluta fugiat
+        consequatur nemo, eum ad. Officia magni distinctio minus veniam vel fugit nam aliquid blanditiis, quidem quod
+        commodi ut eius omnis deserunt, delectus voluptates suscipit.</p>
+    <h3 class="text-center">Centered Heading</h3>
+    <p class="text-center">Para with class</p>
+    <p class="text-center">Another Para with same class</p>
+    <ul>
+        <li class="text-center">List Item with class</li>
+    </ul>
+    <h2 class="headingClass">Another h2 with a same class.</h2>
+    <script>
+        let h1WithId = document.getElementById("headingId");
+        console.log(h1WithId);
+        // h1WithId.textContent = "<u>Heading changed by DOM</u>";
+        h1WithId.innerHTML = "<u>Heading changed by DOM</u>";
+        // css properties should be changed to camelCase
+        // Ex: font-size => fontSize, text-align => textAlign
+        // border-width => borderWidth 
+        h1WithId.style.textAlign = "center";
+        h1WithId.style.color = "red";
+        h1WithId.style.border = "1px solid black";
+        h1WithId.style.padding = "10px";
+
+        let headingWithoutContent = document.getElementById("noHeading");
+        headingWithoutContent.innerHTML = "<i>Heading added from DOM manipulation</i>";
+    </script>
+</body>
+
+</html>

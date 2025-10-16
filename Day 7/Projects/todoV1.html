@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My Todo List</h2>
+        <input type="text" id="todoInput" placeholder="Enter a new task...">
+        <button onclick="addTodo()">Add Todo</button>
+        <div id="todoList"></div>
+    </div>
+
+    <script>
+        let todoCount = 0;
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const todoText = input.value.trim();
+            
+            if (todoText === '') {
+                alert('Please enter a task!');
+                return;
+            }
+
+            const todoList = document.getElementById('todoList');
+            const todoId = 'todo-' + todoCount++;
+            
+            const todoItem = document.createElement('div');
+            todoItem.className = 'todo-item';
+            todoItem.id = todoId;
+            todoItem.innerHTML = `
+                <span>${todoText}</span>
+                <div>
+                    <button onclick="toggleComplete('${todoId}')">✓</button>
+                    <button class="delete-btn" onclick="deleteTodo('${todoId}')">✕</button>
+                </div>
+            `;
+
+            todoList.appendChild(todoItem);
+            input.value = '';
+            input.focus();
+        }
+
+        function toggleComplete(todoId) {
+            const todoItem = document.getElementById(todoId);
+            todoItem.classList.toggle('completed');
+        }
+
+        function deleteTodo(todoId) {
+            const todoItem = document.getElementById(todoId);
+            todoItem.remove();
+        }
+
+        // Enter key support
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+    </script>
+</body>
+</html>

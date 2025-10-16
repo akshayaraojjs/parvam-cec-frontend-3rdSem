@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="heading2">Some Heading</h1>
+    <h1 id="heading">List of Items</h1>
+    <ul id="items-list">
+        <li>Bread</li>
+        <li>Butter</li>
+        <li>Jam</li>
+        <li>Gulkan</li>
+        <li>Sandwitch</li>
+        <li>Burger</li>
+    </ul>
+    <button id="clickBtn">Click here</button><br><br>
+    Type here: <input type="text" id="textInput">
+    <p id="showText"></p>
+    <script>
+        let headingId = document.getElementById("heading");
+
+        // addEventListener('event', function_call / function_definition)
+        // First Approach without external function
+        headingId.addEventListener('mouseover', function () {
+            headingId.style.fontSize = "30px";
+            headingId.style.color = "green";
+            headingId.style.padding = "5px";
+            headingId.style.textAlign = "center";
+        });
+        // Second Approach with different function
+        let secondHeading = document.getElementById("heading2");
+
+        secondHeading.addEventListener('click', changeHeading);
+
+        function changeHeading() {
+            secondHeading.innerHTML = "Heading changed by click event";
+            secondHeading.style.color = "red";
+        }
+
+        let btnClick = document.getElementById("clickBtn");
+
+        let itemsList = document.getElementsByTagName("li");
+
+        btnClick.addEventListener('click', changeListStyle);
+
+        function changeListStyle() {
+            Array.from(itemsList).forEach((item, index) => {
+                item.style.color = "white";
+                item.style.padding = "5px";
+                item.style.width = "100px";
+                item.style.border = "2px solid yellow";
+                item.style.backgroundColor = index % 2 === 0 ? "black" : "gray"; // Alternates between black and gray
+            });
+        }
+
+        let inputText = document.getElementById("textInput");
+
+        let output = document.getElementById("showText");
+
+        inputText.addEventListener('keydown', function(e){
+            // Debugging Purpose
+            console.log(e);
+            console.log(e.key);
+            console.log(e.keyCode);
+            console.log(e.code);
+            output.textContent = `You've typed: ${inputText.value}`;  
+            output.style.fontSize = "30px";
+            output.style.padding = "5px";
+            output.style.border = "2px solid red";
+            output.style.color = "blue";
+            
+            if(e.ctrlKey == true){
+                output.textContent = `You've used Ctrl Key!Don't copy`;  
+                output.style.color = "red";
+            }
+        })
+    </script>
+</body>
+
+</html>

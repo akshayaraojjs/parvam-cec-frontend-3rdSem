@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="heading" style="color:red" onmouseover="mouseHovered()" onmouseout="mouseWentOut()">This is a heading</h1>
+
+    <div id="para-group" onmouseenter="changeStyle()" onmouseleave="changeParaStyle()">
+        <p>This is first paragraph.</p>
+        <p>This is second paragraph.</p>
+        <p>This is third paragraph.</p>
+    </div>
+
+    <div id="box">This is a box</div>
+
+    <button id="clickBtn" onclick="boxDesign()" ondblclick="changeColor()">Click me</button>
+    <script>
+        let headingWithId = document.getElementById("heading");
+
+        function mouseHovered() {
+            headingWithId.style.textAlign = "center";
+            headingWithId.style.backgroundColor = "yellow";
+        }
+
+        function mouseWentOut() {
+            headingWithId.style.textAlign = "center";
+            headingWithId.style.color = "yellow";
+            headingWithId.style.backgroundColor = "red";
+        }
+
+        let boxDiv = document.getElementById("box");
+        function boxDesign() {
+            boxDiv.style.width = "200px";
+            boxDiv.style.height = "200px";
+            boxDiv.style.backgroundColor = "blue";
+            boxDiv.style.fontSize = "20px";
+            boxDiv.textContent = "Box Design Added";
+            boxDiv.style.color = "white";
+            boxDiv.style.border = "5px ridge yellow";
+        }
+
+        function changeColor() {
+            boxDiv.style.backgroundColor = "red";
+            boxDiv.style.color = "white";
+            boxDiv.style.fontSize = "20px";
+            boxDiv.textContent = "Box Color Changed";
+            boxDiv.style.border = "5px ridge yellow";
+        }
+
+        let paraDiv = document.getElementById("para-group");
+
+        let paras = document.getElementsByTagName("p");
+
+        function changeStyle() {
+            // For first child - first para
+            // paras[0].style.border = "2px solid black";
+            // paras[0].style.padding = "10px";
+            // paras[0].style.margin = "5px";
+            // paras[0].style.textAlign = "center";
+            // paras[0].style.fontSize = "25px";
+            // For second child - second para
+            // paras[1].style.border = "2px solid brown";
+            // paras[1].style.padding = "10px";
+            // paras[1].style.margin = "5px";
+            // paras[1].style.textAlign = "center";
+            // paras[1].style.fontSize = "30px";
+            // Convert HTMLCollection to an array to use forEach
+            Array.from(paras).forEach((para) => {
+                para.style.border = "2px solid black";
+                para.style.padding = "10px";
+                para.style.margin = "5px";
+                para.style.textAlign = "center";
+                para.style.fontSize = "25px";
+            });
+        }
+
+        function changeParaStyle() {
+            // Convert HTMLCollection to an array to use forEach
+            Array.from(paras).forEach((element) => {
+                element.style.backgroundColor = "brown";
+                element.style.color = "white";
+            });
+        }
+    </script>
+</body>
+
+</html>

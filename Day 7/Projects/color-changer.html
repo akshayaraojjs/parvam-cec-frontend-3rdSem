@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+    <style>
+        body {
+            transition: background-color 0.5s;
+            text-align: center;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            border: 2px solid #333;
+            border-radius: 10px;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Color Changer</h1>
+    
+    <div class="controls">
+        <button onclick="changeColor('lightblue')">Light Blue</button>
+        <button onclick="changeColor('lightcoral')">Coral</button>
+        <button onclick="changeColor('lightgreen')">Green</button>
+        <button onclick="changeRandomColor()">Random Color</button>
+        <button onclick="resetColor()">Reset</button>
+    </div>
+
+    <div>
+        <h3>Click on colors below:</h3>
+        <div class="color-box" style="background-color: #FF6B6B;" onclick="changeColor('#FF6B6B')"></div>
+        <div class="color-box" style="background-color: #4ECDC4;" onclick="changeColor('#4ECDC4')"></div>
+        <div class="color-box" style="background-color: #FFE66D;" onclick="changeColor('#FFE66D')"></div>
+        <div class="color-box" style="background-color: #95E1D3;" onclick="changeColor('#95E1D3')"></div>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <input type="color" id="customColor" onchange="changeCustomColor(this.value)">
+        <label for="customColor">Or choose custom color</label>
+    </div>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            updateColorDisplay(color);
+        }
+
+        function changeRandomColor() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#A8E6CF', '#FFAAA5'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            changeColor(randomColor);
+        }
+
+        function changeCustomColor(color) {
+            document.body.style.backgroundColor = color;
+            updateColorDisplay(color);
+        }
+
+        function resetColor() {
+            document.body.style.backgroundColor = 'white';
+            updateColorDisplay('white');
+        }
+
+        function updateColorDisplay(color) {
+            const display = document.createElement('div');
+            display.style.marginTop = '20px';
+            display.style.padding = '10px';
+            display.style.backgroundColor = color;
+            display.style.color = getContrastColor(color);
+            display.innerHTML = `Current Color: ${color}`;
+            
+            // Remove previous display if exists
+            const oldDisplay = document.querySelector('.color-display');
+            if (oldDisplay) {
+                oldDisplay.remove();
+            }
+            
+            display.className = 'color-display';
+            document.body.appendChild(display);
+        }
+
+        function getContrastColor(hexcolor) {
+            // Simple contrast calculation for demo
+            return hexcolor === 'white' ? 'black' : 'white';
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case '1': changeColor('lightblue'); break;
+                case '2': changeColor('lightcoral'); break;
+                case '3': changeColor('lightgreen'); break;
+                case 'r': changeRandomColor(); break;
+                case 'Escape': resetColor(); break;
+            }
+        });
+    </script>
+</body>
+</html>

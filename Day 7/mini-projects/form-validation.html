@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+
+        input {
+            margin: 5px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="signupForm">
+        <h3>Sign Up</h3>
+
+        <input type="text" id="name" placeholder="Full Name">
+        <span id="nameError" class="error"></span><br>
+
+        <input type="email" id="email" placeholder="Email">
+        <span id="emailError" class="error"></span><br>
+
+        <input type="password" id="password" placeholder="Password">
+        <span id="passwordError" class="error"></span><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('signupForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        // Real-time validation
+        nameInput.addEventListener('input', validateName);
+        emailInput.addEventListener('input', validateEmail);
+        passwordInput.addEventListener('input', validatePassword);
+
+        // Form submission
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent actual form submission
+
+            if (validateName() && validateEmail() && validatePassword()) {
+                alert('Form submitted successfully!');
+                form.reset();
+                clearErrors();
+            } else {
+                alert('Please fix the errors before submitting.');
+            }
+        });
+
+        function validateName() {
+            const error = document.getElementById('nameError');
+            if (nameInput.value.length < 2) {
+                error.textContent = 'Name must be at least 2 characters';
+                nameInput.style.borderColor = 'red';
+                return false;
+            } else {
+                error.textContent = '';
+                nameInput.style.borderColor = 'green';
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const error = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(emailInput.value)) {
+                error.textContent = 'Please enter a valid email';
+                emailInput.style.borderColor = 'red';
+                return false;
+            } else {
+                error.textContent = '';
+                emailInput.style.borderColor = 'green';
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            const error = document.getElementById('passwordError');
+            if (passwordInput.value.length < 6) {
+                error.textContent = 'Password must be at least 6 characters';
+                passwordInput.style.borderColor = 'red';
+                return false;
+            } else {
+                error.textContent = '';
+                passwordInput.style.borderColor = 'green';
+                return true;
+            }
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error').forEach(error => {
+                error.textContent = '';
+            });
+            document.querySelectorAll('input').forEach(input => {
+                input.style.borderColor = '#ccc';
+            });
+        }
+    </script>
+</body>
+
+</html>

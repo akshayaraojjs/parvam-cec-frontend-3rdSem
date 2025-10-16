@@ -1,0 +1,36 @@
+Commonly Used Events List:
+
+Mouse Events:
+    click - Element is clicked
+    dblclick - Element is double-clicked
+    mousedown - Mouse button is pressed down
+    mouseup - Mouse button is released
+    mousemove - Mouse is moved over element
+    mouseover - Mouse moves onto element
+    mouseout - Mouse moves out of element
+    mouseenter - Mouse enters element
+    mouseleave - Mouse leaves element
+
+Keyboard Events:
+    keydown - Key is pressed down
+    keyup - Key is released
+    keypress - Key is pressed (deprecated)
+
+Form Events:
+    submit - Form is submitted
+    change - Input value changes
+    input - Input value is being changed
+    focus - Element gets focus
+    blur - Element loses focus
+    select - Text is selected in input
+
+Window/Document Events:
+    load - Page has finished loading
+    DOMContentLoaded - DOM is ready (no images)
+    resize - Window is resized
+    scroll - Element is scrolled
+
+Touch Events:
+    touchstart - Touch starts
+    touchend - Touch ends
+    touchmove - Touch moves

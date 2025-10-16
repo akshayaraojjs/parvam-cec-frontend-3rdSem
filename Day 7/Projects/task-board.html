@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop Task Board</title>
+    <style>
+        .board {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: #f0f0f0;
+            min-height: 400px;
+        }
+        .column {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .column h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+            cursor: move;
+            transition: all 0.3s;
+        }
+        .task:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .task.dragging {
+            opacity: 0.5;
+            background: #e9ecef;
+        }
+        .column.drop-zone {
+            background: #e7f3ff;
+            border: 2px dashed #007bff;
+        }
+        .add-task {
+            margin-top: 15px;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Drag & Drop Task Board</h1>
+    
+    <div class="board">
+        <div class="column" id="todo-column">
+            <h3>To Do</h3>
+            <div class="task" draggable="true">Design homepage</div>
+            <div class="task" draggable="true">Write documentation</div>
+            <button class="add-task" onclick="addTask('todo-column')">+ Add Task</button>
+        </div>
+        
+        <div class="column" id="progress-column">
+            <h3>In Progress</h3>
+            <div class="task" draggable="true">Develop login feature</div>
+            <button class="add-task" onclick="addTask('progress-column')">+ Add Task</button>
+        </div>
+        
+        <div class="column" id="done-column">
+            <h3>Done</h3>
+            <div class="task" draggable="true">Setup project structure</div>
+            <button class="add-task" onclick="addTask('done-column')">+ Add Task</button>
+        </div>
+    </div>
+
+    <script>
+        let taskId = 1;
+        let draggedTask = null;
+
+        // Add drag event listeners to all tasks
+        document.querySelectorAll('.task').forEach(task => {
+            task.addEventListener('dragstart', handleDragStart);
+            task.addEventListener('dragend', handleDragEnd);
+        });
+
+        // Add drop zone event listeners to all columns
+        document.querySelectorAll('.column').forEach(column => {
+            column.addEventListener('dragover', handleDragOver);
+            column.addEventListener('dragenter', handleDragEnter);
+            column.addEventListener('dragleave', handleDragLeave);
+            column.addEventListener('drop', handleDrop);
+        });
+
+        function handleDragStart(e) {
+            draggedTask = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnd() {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.column').forEach(col => {
+                col.classList.remove('drop-zone');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('drop-zone');
+        }
+
+        function handleDragLeave() {
+            this.classList.remove('drop-zone');
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            if (draggedTask && draggedTask !== this) {
+                this.insertBefore(draggedTask, this.querySelector('.add-task'));
+                updateTaskCounts();
+            }
+            
+            this.classList.remove('drop-zone');
+            return false;
+        }
+
+        function addTask(columnId) {
+            const column = document.getElementById(columnId);
+            const taskText = prompt('Enter task description:');
+            
+            if (taskText) {
+                const task = document.createElement('div');
+                task.className = 'task';
+                task.draggable = true;
+                task.textContent = taskText;
+                task.id = 'task-' + taskId++;
+                
+                task.addEventListener('dragstart', handleDragStart);
+                task.addEventListener('dragend', handleDragEnd);
+                
+                column.insertBefore(task, column.querySelector('.add-task'));
+                updateTaskCounts();
+            }
+        }
+
+        function updateTaskCounts() {
+            document.querySelectorAll('.column').forEach(column => {
+                const taskCount = column.querySelectorAll('.task').length;
+                const header = column.querySelector('h3');
+                const originalText = header.textContent.split(' (')[0];
+                header.textContent = `${originalText} (${taskCount})`;
+            });
+        }
+
+        // Double click to edit task
+        document.addEventListener('dblclick', function(e) {
+            if (e.target.classList.contains('task')) {
+                const newText = prompt('Edit task:', e.target.textContent);
+                if (newText !== null) {
+                    e.target.textContent = newText;
+                }
+            }
+        });
+
+        // Initialize task counts
+        updateTaskCounts();
+    </script>
+</body>
+</html>

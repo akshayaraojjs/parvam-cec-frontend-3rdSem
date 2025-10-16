@@ -13,11 +13,59 @@
     <h1 id="headingId">This is a third heading with a ID.</h1>
     <h2 class="headingClass">This is a fourth heading with h2 tag and a Class.</h2>
     <h1>This is fifth heading.</h1>
+    <p id="paraId">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, unde!</p>
+    <p class="headingClass">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis incidunt quis vitae omnis dolores reiciendis natus tempora architecto voluptatem. Obcaecati rem blanditiis aliquam animi soluta fugiat consequatur nemo, eum ad. Officia magni distinctio minus veniam vel fugit nam aliquid blanditiis, quidem quod commodi ut eius omnis deserunt, delectus voluptates suscipit.</p>
+    <h3 class="text-center">Centered Heading</h3>
+    <p class="text-center">Para with class</p>
+    <p class="text-center">Another Para with same class</p>
+    <ul>
+        <li class="text-center">List Item with class</li>
+    </ul>
+    <h2 class="headingClass">Another h2 with a same class.</h2>
     <!-- DOM - Document Object Model -->
     <!-- We have 5 types of Selectors in DOM -->
     <!-- getElementById, getElementsByClassName, getElementsByTagName, querySelector(), querySelectorAll() -->
     <script>
         console.log(document);
+
+        // Selectors will be in camelCase
+        // getElementById 
+        let  headingWithId = document.getElementById("headingId");
+        console.log(headingWithId);
+
+        let paraWithId = document.getElementById("paraId");
+        console.log(paraWithId);
+
+        // getElementsByClassName
+        let elementsWithClass = document.getElementsByClassName("headingClass");
+        console.log(elementsWithClass);
+
+        let classWithTextCenter = document.getElementsByClassName("text-center");
+        console.log(classWithTextCenter);
+
+        // getElementsByTagName
+        let heading1 = document.getElementsByTagName("h1");
+        console.log(heading1);
+
+        let paras = document.getElementsByTagName("p");
+        console.log(paras);
+
+        // querySelector
+        let h2WithHeadingClass = document.querySelector("h2.headingClass");
+        console.log(h2WithHeadingClass);    
+        
+        let paraTextCenter = document.querySelector("p.text-center");
+        console.log(paraTextCenter);
+
+        let textCenterClass = document.querySelector(".text-center");
+        console.log(textCenterClass);
+
+        let firstPara = document.querySelector("p");
+        console.log(firstPara);
+
+        // querySelectorAll
+        let textCenterParas = document.querySelectorAll("p.text-center");
+        console.log(textCenterParas);
     </script>
 </body>
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="products">
+        <div class="product">
+            <h3>Product 1</h3>
+            <span class="price">$10</span>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product">
+            <h3>Product 2</h3>
+            <span class="price">$20</span>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+    <div id="cart">
+        <h3>Cart: <span id="cart-total">$0</span></h3>
+    </div>
+    <script>
+        let total = 0;
+        const cartTotal = document.getElementById('cart-total');
+        const addButtons = document.querySelectorAll('.add-to-cart');
+
+        addButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.parentElement;
+                const priceText = product.querySelector('.price').textContent;
+                const price = parseInt(priceText.replace('$', ''));
+
+                total += price;
+                cartTotal.textContent = `$${total}`;
+
+                // Visual feedback
+                button.textContent = 'Added!';
+                button.style.backgroundColor = 'green';
+                setTimeout(() => {
+                    button.textContent = 'Add to Cart';
+                    button.style.backgroundColor = '';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+        .warning {
+            color: #dc3545;
+        }
+        .good {
+            color: #28a745;
+        }
+        .limit-reached {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Real-time Character Counter</h1>
+        <p>Start typing to see real-time statistics:</p>
+        
+        <textarea 
+            id="textInput" 
+            placeholder="Type your text here..."
+            maxlength="500"
+        ></textarea>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="charCount">0</div>
+                <div class="stat-label">Characters</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="wordCount">0</div>
+                <div class="stat-label">Words</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="sentenceCount">0</div>
+                <div class="stat-label">Sentences</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="remainingChars">500</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="clearText()">Clear Text</button>
+            <button onclick="copyToClipboard()">Copy Text</button>
+            <button onclick="generateLoremIpsum()">Generate Sample Text</button>
+        </div>
+
+        <div id="readingTime" style="margin-top: 15px; padding: 10px; background: #e7f3ff; border-radius: 5px;"></div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const charCount = document.getElementById('charCount');
+        const wordCount = document.getElementById('wordCount');
+        const sentenceCount = document.getElementById('sentenceCount');
+        const remainingChars = document.getElementById('remainingChars');
+        const readingTime = document.getElementById('readingTime');
+
+        // Event listeners for real-time updates
+        textInput.addEventListener('input', updateStats);
+        textInput.addEventListener('keydown', handleKeyDown);
+        textInput.addEventListener('paste', handlePaste);
+
+        function updateStats() {
+            const text = textInput.value;
+            const characters = text.length;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim()).length;
+            const remaining = 500 - characters;
+
+            // Update display
+            charCount.textContent = characters;
+            wordCount.textContent = words;
+            sentenceCount.textContent = sentences;
+            remainingChars.textContent = remaining;
+
+            // Visual feedback for character limit
+            if (remaining <= 50) {
+                remainingChars.className = 'stat-value warning';
+                if (remaining <= 10) {
+                    textInput.classList.add('limit-reached');
+                } else {
+                    textInput.classList.remove('limit-reached');
+                }
+            } else {
+                remainingChars.className = 'stat-value good';
+                textInput.classList.remove('limit-reached');
+            }
+
+            // Calculate reading time
+            const readingTimeMinutes = Math.ceil(words / 200);
+            readingTime.textContent = `Estimated reading time: ${readingTimeMinutes} minute${readingTimeMinutes !== 1 ? 's' : ''}`;
+        }
+
+        function handleKeyDown(e) {
+            // Prevent typing if character limit reached
+            if (textInput.value.length >= 500 && e.key.length === 1) {
+                e.preventDefault();
+                alert('Character limit reached! Maximum 500 characters allowed.');
+            }
+        }
+
+        function handlePaste(e) {
+            // Check if pasted content would exceed limit
+            const pasteData = e.clipboardData.getData('text');
+            if (textInput.value.length + pasteData.length > 500) {
+                e.preventDefault();
+                alert('Pasting this content would exceed the character limit!');
+            }
+        }
+
+        function clearText() {
+            textInput.value = '';
+            updateStats();
+            textInput.focus();
+        }
+
+        function copyToClipboard() {
+            textInput.select();
+            document.execCommand('copy');
+            alert('Text copied to clipboard!');
+        }
+
+        function generateLoremIpsum() {
+            const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+            textInput.value = lorem;
+            updateStats();
+        }
+
+        // Auto-save functionality (every 5 seconds)
+        setInterval(() => {
+            if (textInput.value) {
+                localStorage.setItem('autoSavedText', textInput.value);
+                console.log('Text auto-saved at: ' + new Date().toLocaleTimeString());
+            }
+        }, 5000);
+
+        // Load auto-saved text on page load
+        window.addEventListener('load', () => {
+            const savedText = localStorage.getItem('autoSavedText');
+            if (savedText) {
+                if (confirm('Found auto-saved text. Would you like to restore it?')) {
+                    textInput.value = savedText;
+                    updateStats();
+                }
+            }
+        });
+
+        // Initialize
+        updateStats();
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .thumbnails {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        .thumbnails img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .thumbnails img:hover {
+            border-color: blue;
+            transform: scale(1.05);
+        }
+
+        .thumbnails img.active {
+            border-color: red;
+            border-width: 3px;
+        }
+
+        .preview {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .preview img {
+            max-width: 100%;
+            max-height: 400px;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+
+        #imageCaption {
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .instructions {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Wildlife Image Gallery</h1>
+
+    <div class="gallery">
+        <div class="preview">
+            <img id="previewImage" src="../../media/images/baby-lion-5173894_1920.jpg" alt="Preview">
+            <p id="imageCaption">Baby Lion</p>
+        </div>
+        <div class="thumbnails">
+            <img src="../../media/images/baby-lion-5173894_1920.jpg" alt="Baby Lion"
+                data-full="../../media/images/baby-lion-5173894_1920.jpg" class="active">
+            <img src="../../media/images/leopard-515508_1920.jpg" alt="Leopard"
+                data-full="../../media/images/leopard-515508_1920.jpg">
+            <img src="../../media/images/tiger.png" alt="Tiger" data-full="../../media/images/tiger.png">
+        </div>
+    </div>
+
+    <script>
+        const thumbnails = document.querySelectorAll('.thumbnails img');
+        const previewImage = document.getElementById('previewImage');
+        const imageCaption = document.getElementById('imageCaption');
+
+        // Function to update active thumbnail
+        function updateActiveThumbnail(clickedThumb) {
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            clickedThumb.classList.add('active');
+        }
+
+        // Function to get image filename from path
+        function getFilename(path) {
+            return path.split('/').pop();
+        }
+
+        thumbnails.forEach(thumbnail => {
+            // Click to view larger image
+            thumbnail.addEventListener('click', function () {
+                const fullSizeSrc = this.getAttribute('data-full');
+                previewImage.src = fullSizeSrc;
+                imageCaption.textContent = this.alt;
+                updateActiveThumbnail(this);
+            });
+
+            // Mouseover effects
+            thumbnail.addEventListener('mouseover', function () {
+                this.style.opacity = '0.7';
+            });
+
+            thumbnail.addEventListener('mouseout', function () {
+                this.style.opacity = '1';
+            });
+        });
+
+        // Keyboard navigation - FIXED VERSION
+        document.addEventListener('keydown', function (event) {
+            // Get current active thumbnail
+            const currentThumb = document.querySelector('.thumbnails img.active');
+            const currentIndex = Array.from(thumbnails).indexOf(currentThumb);
+
+            let newIndex;
+
+            if (event.key === 'ArrowRight') {
+                // Move to next image (circular)
+                newIndex = (currentIndex + 1) % thumbnails.length;
+            } else if (event.key === 'ArrowLeft') {
+                // Move to previous image (circular)
+                newIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+            } else {
+                return; // Ignore other keys
+            }
+
+            // Simulate click on the new thumbnail
+            thumbnails[newIndex].click();
+
+            // Prevent default arrow key behavior (scrolling)
+            event.preventDefault();
+        });
+
+        // Add focus to the gallery for better keyboard accessibility
+        document.addEventListener('DOMContentLoaded', function () {
+            // Focus the gallery container
+            document.querySelector('.gallery').setAttribute('tabindex', '0');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .tools {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .tool-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .tool-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+        .color-picker {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .canvas-container {
+            border: 3px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px auto;
+            background: white;
+        }
+        canvas {
+            display: block;
+            cursor: crosshair;
+        }
+        .brush-size {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Interactive Drawing Canvas</h1>
+        
+        <div class="tools">
+            <button class="tool-btn active" onclick="setTool('brush')">🖌️ Brush</button>
+            <button class="tool-btn" onclick="setTool('eraser')">🧽 Eraser</button>
+            <button class="tool-btn" onclick="setTool('line')">📏 Line</button>
+            <button class="tool-btn" onclick="setTool('rectangle')">⬜ Rectangle</button>
+            <button class="tool-btn" onclick="setTool('circle')">⭕ Circle</button>
+            
+            <input type="color" class="color-picker" id="colorPicker" value="#ff0000" onchange="setColor(this.value)">
+            <input type="range" class="brush-size" id="brushSize" min="1" max="50" value="5" oninput="setBrushSize(this.value)">
+            <span id="sizeValue">5px</span>
+            
+            <button class="tool-btn" onclick="clearCanvas()">🗑️ Clear</button>
+            <button class="tool-btn" onclick="saveDrawing()">💾 Save</button>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="drawingCanvas" width="800" height="500"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let isDrawing = false;
+        let currentTool = 'brush';
+        let currentColor = '#ff0000';
+        let brushSize = 5;
+        let startX, startY;
+        let savedImageData;
+
+        // Set initial canvas background
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        function setTool(tool) {
+            currentTool = tool;
+            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Change cursor based on tool
+            switch(tool) {
+                case 'brush': canvas.style.cursor = 'crosshair'; break;
+                case 'eraser': canvas.style.cursor = 'cell'; break;
+                case 'line': canvas.style.cursor = 'crosshair'; break;
+                case 'rectangle': canvas.style.cursor = 'crosshair'; break;
+                case 'circle': canvas.style.cursor = 'crosshair'; break;
+            }
+        }
+
+        function setColor(color) {
+            currentColor = color;
+        }
+
+        function setBrushSize(size) {
+            brushSize = parseInt(size);
+            document.getElementById('sizeValue').textContent = size + 'px';
+        }
+
+        function clearCanvas() {
+            if (confirm('Are you sure you want to clear the canvas?')) {
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function saveDrawing() {
+            const link = document.createElement('a');
+            link.download = 'my-drawing.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Mouse event listeners
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch event listeners for mobile
+        canvas.addEventListener('touchstart', handleTouchStart);
+        canvas.addEventListener('touchmove', handleTouchMove);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getMousePos(e);
+            startX = pos.x;
+            startY = pos.y;
+            
+            if (currentTool === 'brush' || currentTool === 'eraser') {
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+            } else {
+                savedImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const pos = getMousePos(e);
+            const currentX = pos.x;
+            const currentY = pos.y;
+
+            switch(currentTool) {
+                case 'brush':
+                    ctx.lineWidth = brushSize;
+                    ctx.lineCap = 'round';
+                    ctx.strokeStyle = currentColor;
+                    ctx.lineTo(currentX, currentY);
+                    ctx.stroke();
+                    break;
+                    
+                case 'eraser':
+                    ctx.lineWidth = brushSize;
+                    ctx.lineCap = 'round';
+                    ctx.strokeStyle = 'white';
+                    ctx.lineTo(currentX, currentY);
+                    ctx.stroke();
+                    break;
+                    
+                case 'line':
+                    ctx.putImageData(savedImageData, 0, 0);
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(currentX, currentY);
+                    ctx.lineWidth = brushSize;
+                    ctx.strokeStyle = currentColor;
+                    ctx.stroke();
+                    break;
+                    
+                case 'rectangle':
+                    ctx.putImageData(savedImageData, 0, 0);
+                    ctx.beginPath();
+                    ctx.rect(startX, startY, currentX - startX, currentY - startY);
+                    ctx.lineWidth = brushSize;
+                    ctx.strokeStyle = currentColor;
+                    ctx.stroke();
+                    break;
+                    
+                case 'circle':
+                    ctx.putImageData(savedImageData, 0, 0);
+                    ctx.beginPath();
+                    const radius = Math.sqrt(Math.pow(currentX - startX, 2) + Math.pow(currentY - startY, 2));
+                    ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
+                    ctx.lineWidth = brushSize;
+                    ctx.strokeStyle = currentColor;
+                    ctx.stroke();
+                    break;
+            }
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'b': setTool('brush'); break;
+                case 'e': setTool('eraser'); break;
+                case 'l': setTool('line'); break;
+                case 'r': setTool('rectangle'); break;
+                case 'c': setTool('circle'); break;
+                case 'Delete': clearCanvas(); break;
+                case 's': if (e.ctrlKey) saveDrawing(); break;
+            }
+        });
+    </script>
+</body>
+</html>

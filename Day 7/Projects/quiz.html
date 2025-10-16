@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <style>
+        .quiz-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover {
+            background: #e9ecef;
+        }
+        .option.selected {
+            border-color: #007bff;
+            background: #e7f3ff;
+        }
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>JavaScript Quiz</h1>
+        <div id="quizContent">
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+            <button id="nextBtn" onclick="nextQuestion()" disabled>Next Question</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Which language runs in web browsers?",
+                options: ["Java", "C", "Python", "JavaScript"],
+                correct: 3
+            },
+            {
+                question: "What does CSS stand for?",
+                options: [
+                    "Central Style Sheets",
+                    "Cascading Style Sheets",
+                    "Cascading Simple Sheets",
+                    "Cars SUVs Sailboats"
+                ],
+                correct: 1
+            },
+            {
+                question: "What does HTML stand for?",
+                options: [
+                    "Hypertext Markup Language",
+                    "Hypertext Markdown Language",
+                    "Hyperloop Machine Language",
+                    "Helicopters Terminals Motorboats Lamborginis"
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const nextBtn = document.getElementById('nextBtn');
+        const resultElement = document.getElementById('result');
+
+        function loadQuestion() {
+            const currentQuiz = quizData[currentQuestion];
+            questionElement.textContent = `Q${currentQuestion + 1}: ${currentQuiz.question}`;
+            
+            optionsElement.innerHTML = '';
+            currentQuiz.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsElement.appendChild(optionElement);
+            });
+
+            nextBtn.disabled = true;
+            selectedOption = null;
+        }
+
+        function selectOption(optionIndex) {
+            if (selectedOption !== null) return;
+
+            selectedOption = optionIndex;
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, index) => {
+                option.classList.remove('selected');
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                }
+            });
+
+            nextBtn.disabled = false;
+        }
+
+        function nextQuestion() {
+            const currentQuiz = quizData[currentQuestion];
+            
+            // Show correct/incorrect
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === currentQuiz.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedOption && index !== currentQuiz.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            // Update score
+            if (selectedOption === currentQuiz.correct) {
+                score++;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < quizData.length) {
+                setTimeout(() => {
+                    loadQuestion();
+                }, 1500);
+            } else {
+                setTimeout(showResults, 1500);
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quizContent').style.display = 'none';
+            resultElement.innerHTML = `
+                <h2>Quiz Completed!</h2>
+                <p>Your score: ${score}/${quizData.length}</p>
+                <p>Percentage: ${((score / quizData.length) * 100).toFixed(1)}%</p>
+                <button onclick="restartQuiz()">Restart Quiz</button>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quizContent').style.display = 'block';
+            resultElement.innerHTML = '';
+            loadQuestion();
+        }
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
+</body>
+</html>

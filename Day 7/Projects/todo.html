@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="todo-app">
+        <input type="text" id="todo-input" placeholder="Add todo">
+        <button id="add-btn">Add</button>
+        <ul id="todo-list">
+            <li class="todo-item">Buy milk</li>
+            <li class="todo-item">Walk dog</li>
+        </ul>
+    </div>
+    <script>
+        const todoInput = document.getElementById('todo-input');
+        const addButton = document.getElementById('add-btn');
+        const todoList = document.getElementById('todo-list');
+
+        addButton.addEventListener('click', () => {
+            if (todoInput.value.trim() !== '') {
+                const newTodo = document.createElement('li');
+                newTodo.className = 'todo-item';
+                newTodo.textContent = todoInput.value;
+                todoList.appendChild(newTodo);
+                todoInput.value = '';
+            }
+        });
+
+        // Mark todos as completed when clicked
+        todoList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('todo-item')) {
+                e.target.style.textDecoration = 'line-through';
+                e.target.style.color = 'gray';
+            }
+        });
+    </script>
+</body>
+
+</html>
