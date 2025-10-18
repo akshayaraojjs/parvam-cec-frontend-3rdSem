@@ -1,0 +1,126 @@
+To create a React Js Project, we can use this command:
+
+npm create vite@latest app-name --template react
+
+Ex: npm create vite@latest my-ecommerce-app --template react
+
+First Time:
+
+It will ask for the framework selection, you need to select React Framework
+
+Then Need to select the variant:
+JavaScript
+
+Then No option
+
+Next Yes option
+
+It will run the application and show the URL:
+http://localhost:5173
+
+http: Hypertext Transfer Protocol
+localhost: Our System / local machine
+5173: Port number used by Vite to run the application
+
+If hosted or deployed, the url will change like this:
+https://frontend-website.com
+
+https: Hypertext Transfer Protocol Secure
+frontend-website.com is the domain where the frontend React app will be running
+
+Open the url in browser to see the React + Vite Launch page
+-------------------------------------------------------------------
+To setup the application:
+
+We need to copy the path of the installed React App
+
+Open VS Code terminal (Ctrl + Shift + `), then switch to cmd
+
+Then need to run:
+
+cd "copied-path"
+
+Ex: cd "D:\ParvaM Training\CEC\CEC - Frontend - 3rd Sem\parvam-cec-frontend-3rdSem\Day 9\ecommerce-app"
+
+Now path has been changed to the React-app location
+
+You need to install the dependency, Run:
+npm install
+
+To run the application:
+npm run dev
+-----------------------------------------------------------------
+To run the application:
+
+We need to copy the path of the installed React App
+
+Open terminal, then switch to cmd
+
+Then need to run:
+
+cd "copied-path"
+
+Now path has been changed to the React-app location
+
+To run the application:
+npm run dev
+
+Open the url in browser:
+http://localhost:5173
+----------------------------------------------------------------
+To install additional dependencies:
+
+npm install react-router-dom
+
+npm install bootstrap
+
+react-router-dom is used for Navigation in App.jsx using Routes
+
+bootstrap is used for Design purpose
+---------------------------------------------------------------
+If we use bootstrap, we need to import the bootstrap path in main.jsx:
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+--------------------------------------------------------------
+We will make use of components for reusable designs and pages to integrate the components
+
+So we make 2 folders:
+src/components
+src/pages
+-------------------------------------------------------------
+We need to follow Pascal Case for creating the jsx files:
+
+Ex: Home.jsx, Navbar.jsx, AboutUs.jsx, Footer.jsx, Products.jsx, ContactUs.jsx, AddToCart.jsx
+
+jsx refers to "JavaScript XML" (Virtual DOM)
+
+XML - Extended Markup Language
+----------------------------------------------------------------
+Basics:
+
+Template to work with jsx file:
+
+function FileName() {
+    return (
+        // Write your HTML code here
+    );
+}
+
+export default FileName;
+
+Ex: AboutUs.jsx
+
+function AboutUs() {
+    return (
+        // If we have single element, we can directly write that.
+        <h1>About Us Page</h1>
+
+        // If we have more elements, we need to make a parent div to write the child elements
+        <div>
+            <h1>About Us Page</h1>
+            
+    );
+}
+
+export default AboutUs;

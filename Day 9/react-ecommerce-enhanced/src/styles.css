@@ -1,0 +1,14 @@
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.badge {
+    font-size: 0.7rem;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+}
