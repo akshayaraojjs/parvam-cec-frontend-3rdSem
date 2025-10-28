@@ -1,0 +1,40 @@
+npm create vite@latest react-basics --template react
+
+package.json - dependency manager to maintain the versions of the libraries and packages
+
+jsx - JavaScript  (Virtual DOM)
+
+DOM - Document Object Model
+
+DOM tree maintains the HTML Structure
+
+XML - Extended Markup Language
+
+src - main.jsx (Main file which is going to inject the HTML from JavaScript by targetting the "Root" id)
+
+index.html - Root id can be found in the index.html file which is going to render the data to the end user
+
+App.jsx - Brain/Controller of all other components
+
+We will do this manually: 
+Two folders: 
+- src/components
+- src/pages
+
+components - part of a web page (reusable code)
+Ex: Navbar, Footer, Buttons, Cards, Hero
+
+pages - combination of multiple components or individual page
+
+node_modules - Dependency to work with React App (npm install)
+
+react port: 3000
+
+react + vite port: 5173
+
+http://localhost:5173
+
+Additional Dependencies:
+
+react-router-dom : For Navigation purpose
+bootstrap : For using the Bootstrap Designs or Components

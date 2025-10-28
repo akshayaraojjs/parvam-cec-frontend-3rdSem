@@ -1,0 +1,32 @@
+ul{
+  /* To remove the bullet points */
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+a{
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+  /* To remove the underline from link */
+  text-decoration: none;
+}
+
+h1{
+  text-align: center;
+  color: brown;
+  font-size: 35px;
+}
+
+footer{
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* We have CSS Positions: Static, Relative, Absolute, Fixed & Sticky */
