@@ -1,0 +1,47 @@
+.navbar-brand img {
+  width: 100px;
+}
+
+.orange-text {
+  color: orangered;
+}
+
+div.section-heading {
+  display: flex;
+  justify-content: center;
+  border: 2px solid orangered;
+  padding: 20px;
+  width: fit-content;
+}
+
+.custom-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.service-image {
+  width: 250px !important;
+}
+
+.contact-details {
+  text-align: justify;
+}
+
+footer {
+  background-color: black;
+  color: white;
+}
+
+ul.links {
+  list-style: none;
+  padding: 0 !important;
+}
+
+ul.links a {
+  color: white;
+  text-decoration: none;
+}
+
+ul.links li {
+  margin: 10px 0;
+}
