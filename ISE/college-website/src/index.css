@@ -1,0 +1,73 @@
+.text-block p {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.split-text {
+  color: rgb(75, 144, 75);
+}
+
+.section-heading {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.about-us-images {
+  width: 200px;
+}
+
+ul.courses-list {
+  padding: 0;
+  list-style: none;
+}
+
+ul.courses-list li a {
+  color: black;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+ul.courses-list li {
+  padding: 5px 0;
+  border-bottom: 2px solid black;
+}
+
+ul.courses-list li a:hover {
+  margin-left: 10px;
+  background-color: lightgreen;
+}
+
+footer {
+  background-color: black;
+  padding: 50px;
+  color: white;
+}
+
+footer img {
+  width: 120px;
+}
+
+.custom-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.custom-links ul li a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.custom-links ul li p{
+  padding: 0;
+}
+
+footer p.paragraph{
+  margin: 0 !important;
+}
+
+.social-media{
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+}
