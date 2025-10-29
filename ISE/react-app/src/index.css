@@ -1,0 +1,29 @@
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+ul li a {
+  color: red;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: "Roboto Slab", serif;
+}
+
+h1{
+  text-align: center;
+  color: orange;
+}
+
+footer{
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+}

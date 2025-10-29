@@ -1,0 +1,47 @@
+npm - node package manager
+
+npm create vite@latest react-app --template react
+
+package.json is called dependency manager
+
+jsx - JavaScript XML (Virtual DOM)
+
+XML - Extended Markup Language
+
+index.html - To show the output
+
+main.jsx will inject the html from JavaScript
+
+By targetting the "root" id element
+
+App.jsx - Main Controller of all the components
+
+Template for working with components:
+
+function Menubar() {
+    return (
+
+    );
+}
+
+export default Menubar;
+
+http://localhost:5173/
+
+http: Hypertext Transfer Protocol
+
+localhost: Your system
+
+127.0.0.1 <=> localhost 
+
+5173: port number (Vite)
+
+3000: port number (react)
+
+self closing tags in react should be ended wiith a slash:
+Ex: <br> => <br />, <hr> => <hr />, <img> => <img />
+
+
+React-router-dom is a dependency used for Navigation purpose
+
+<div> <//div> => <></>
